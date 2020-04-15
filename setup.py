@@ -33,8 +33,8 @@ with open(os.path.join(here, 'README.md'), encoding='utf-8') as f:
 setup(
     name="jovian-papermill", 
     version="0.0.0",
-    author="Rohit Sanjay (jovian.ml)",
-    author_email="sanjay.rohit2@gmail.com",
+    author="Jovian",
+    author_email="hello@jovian.ml",
     description="A Jovian I/O handler for papermill",
     long_description=long_description,
     long_description_content_type='text/markdown',

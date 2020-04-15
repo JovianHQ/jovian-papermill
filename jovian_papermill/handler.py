@@ -8,10 +8,9 @@ class JovianHandler:
     @classmethod
     def read(self, path):
         """
-        Read a notebook from a Jovian server.
+        Read a notebook from Jovian
         """
         slug, version = get_slug_and_version(path)
-
         gist = clone.get_gist(slug, version, fresh=False)
         nbfile = get_nbfile(gist["files"])
         notebook = get(nbfile["rawUrl"]).content
@@ -21,15 +20,12 @@ class JovianHandler:
     @classmethod
     def write(self, file_content, path):
         """
-        Commit a notebook to a Jovian server.
+        Commit a notebook to Jovian
         """
         slug, version = get_slug_and_version(path)
-
         metadata = api.get_gist(slug, version)
         filename = get_nbfile(metadata["files"])["filename"]
-
-        f = (filename, file_content)
-        api.upload_file(gist_slug=slug, file=f)
+        api.upload_file(gist_slug=slug, file=(filename, file_content))
 
     @classmethod
     def pretty_path(self, path):
