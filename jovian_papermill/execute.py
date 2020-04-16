@@ -1,13 +1,16 @@
 import warnings
 
-warnings.filterwarnings("ignore")
 import papermill as pm
 
-from .utils import log
+from .utils import encode, log
+
+warnings.filterwarnings("ignore")
 
 
-def execute(gist_slug, parameters, version="0"):
-    path = f"jovian:///{gist_slug}?gist_version={version}"
+def execute(gist_slug, parameters, creds, version="0"):
+    creds = encode(creds)
+    path = f"jovian:///{gist_slug}?gist_version={version}&creds={creds}"
+
     pm.execute_notebook(
         input_path=path,
         output_path=path,

@@ -1,9 +1,11 @@
+import base64
 import json
 import re
 from urllib.parse import parse_qs, urlparse
 
 import nbformat
-from jovian.utils import clone
+
+from .jovian_utils import get_gist
 
 
 def log(msg):
@@ -24,11 +26,10 @@ def get_slug_and_version(path):
     slug = parsed_url.path[1:]
     query = parse_qs(parsed_url.query)
 
-    version = 0
-    if "gist_version" in query:
-        version = query["gist_version"][0]
+    version = query["gist_version"][0]
+    creds = decode(query["creds"][0])
 
-    return slug, version
+    return slug, version, creds
 
 
 def get_gist_and_nbfile(path):
@@ -40,11 +41,11 @@ def get_gist_and_nbfile(path):
     Returns
         gist, nbfile
     """
-    slug, version = get_slug_and_version(path)
-    gist = clone.get_gist(slug, version, fresh=False)
+    slug, version, creds = get_slug_and_version(path)
+    gist = get_gist(slug, version, creds)
     nbfile = get_nbfile(gist["files"])
 
-    return gist, nbfile
+    return gist, nbfile, creds
 
 
 def add_parameters_tag(notebook):
@@ -82,3 +83,11 @@ def add_parameters_tag(notebook):
         )
 
     return json.dumps(nb)
+
+
+def encode(creds):
+    return base64.b64encode(json.dumps(creds).encode("utf-8")).decode("utf-8")
+
+
+def decode(creds):
+    return json.loads(base64.b64decode(creds).decode("utf-8"))
