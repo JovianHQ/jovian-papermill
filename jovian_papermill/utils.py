@@ -19,7 +19,7 @@ def get_gist_and_nbfile(path):
     
     Arguments
         path
-            - should be in the form of jvn:///gist_slug?gist_version=2
+            - should be in the form of jovian:///gist_slug?gist_version=2
     Returns
         gist, nbfile
     """

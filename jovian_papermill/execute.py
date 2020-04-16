@@ -7,7 +7,7 @@ from .utils import log
 
 
 def execute(gist_slug, parameters, version="0"):
-    path = f"jvn:///{gist_slug}?gist_version={version}"
+    path = f"jovian:///{gist_slug}?gist_version={version}"
     pm.execute_notebook(
         input_path=path,
         output_path=path,
