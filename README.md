@@ -17,8 +17,6 @@ Below is the format of a Jovian URL, or we could call it - Jovian Gist Locator (
 
 Papermill recognizes the protocol to be `jvn://` and delegates the I/O Handler to `jovian-papermill`.
 
-**Note**: Input and output JGL must point to same gist for normal usage. 
-
 ## Usage
  
 ### via `jovian-papermill` Python API
