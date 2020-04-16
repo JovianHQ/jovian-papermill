@@ -1,6 +1,7 @@
 import warnings
 
 warnings.filterwarnings("ignore")
+
 import papermill as pm
 from .utils import log
 
@@ -15,3 +16,4 @@ def execute(gist_slug, parameters, version="0"):
         progress_bar=False,
         log_level="INFO",
     )
+    log("Done!")

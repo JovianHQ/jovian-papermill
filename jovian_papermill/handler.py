@@ -1,20 +1,22 @@
 from requests import get
 
 from jovian.utils import api, clone
-from .utils import get_nbfile, get_slug_and_version, log
+from .utils import get_nbfile, get_gist_and_nbfile, log
 
 
 class JovianHandler:
+    gist = None
+
     @classmethod
     def read(cls, path):
         """
         Read a notebook from Jovian
         """
-        slug, version = get_slug_and_version(path)
-        gist = clone.get_gist(slug, version, fresh=False)
-        nbfile = get_nbfile(gist["files"])
+        gist, nbfile = get_gist_and_nbfile(path)
+        cls.gist = gist
+
+        log(f"Cloning...")
         notebook = get(nbfile["rawUrl"]).content
-        log(f"Cloned {slug}")
         return notebook
 
     @classmethod
@@ -22,13 +24,11 @@ class JovianHandler:
         """
         Commit a notebook to Jovian
         """
-        slug, _ = get_slug_and_version(path)
-        metadata = api.get_gist(slug)
-        filename = get_nbfile(metadata["files"])["filename"]
-        gist_slug = metadata["slug"]
+        gist_slug = cls.gist["slug"]
+        filename = get_nbfile(cls.gist["files"])["filename"]
 
+        log(f"Committing..")
         api.upload_file(gist_slug=gist_slug, file=(filename, file_content))
-        log(f"Committed to {slug}")
 
     @classmethod
     def pretty_path(cls, path):

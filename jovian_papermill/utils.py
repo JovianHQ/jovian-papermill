@@ -1,4 +1,5 @@
 from urllib.parse import parse_qs, urlparse
+from jovian.utils import clone
 
 
 def log(msg):
@@ -13,14 +14,14 @@ def get_nbfile(files):
     return None
 
 
-def get_slug_and_version(path):
-    """Get slug and version from custom Jovian path
+def get_gist_and_nbfile(path):
+    """Get gist and nbfile from custom Jovian path
     
     Arguments
         path
             - should be in the form of jvn:///gist_slug?gist_version=2
     Returns
-        slug, version
+        gist, nbfile
     """
     parsed_url = urlparse(path)
 
@@ -31,4 +32,7 @@ def get_slug_and_version(path):
     if "gist_version" in query:
         version = query["gist_version"][0]
 
-    return slug, version
+    gist = clone.get_gist(slug, version, fresh=False)
+    nbfile = get_nbfile(gist["files"])
+
+    return gist, nbfile
