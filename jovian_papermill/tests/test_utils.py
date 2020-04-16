@@ -32,6 +32,8 @@ def test_add_parameters_tag(source):
         ["parametriz\n"],
         ["#123parametriz\n"],
         ["print('Hello world') # parametrize\n"],
+        ["123# parametrize\n"],
+        ["hello# Parametrize\n"],
     ],
 )
 def test_add_parameters_tag_raises_exception(source):

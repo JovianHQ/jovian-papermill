@@ -1,0 +1,5 @@
+[run]
+omit = jovian_papermill/tests/*
+
+[report]
+sort = Cover
