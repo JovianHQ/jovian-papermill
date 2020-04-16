@@ -5,13 +5,13 @@
 ## Installation
 
 ```bash
-pip install jovian-papermill
+pip install git+https://github.com/JovianML/jovian-papermill.git
 ```
 
 ## How it works
 Once installed, a `jvn://` URL must be supplied to papermill as input/output path.
 
-This is the format of a Jovian URL, or we could call it - Jovian Gist Locator (JGL)
+Below is the format of a Jovian URL, or we could call it - Jovian Gist Locator (JGL)
 
 ```jvn:///{gist_slug}?gist_version={version}```
 
