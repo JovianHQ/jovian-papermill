@@ -27,9 +27,9 @@ execute("rohit/city", parameters=dict(city="Mumbai"))
 
 ### via CLI
 ```bash
-papermill -p city 'Mumbai' \                                # parameters
-                  jovian:///cebe687752e844649cdf1e4cfba34c6d \ # input gist
-                  jovian:///cebe687752e844649cdf1e4cfba34c6d \ # output gist
-                  --no-request-save-on-cell-execute         # save after execution terminates
+papermill -p city 'Mumbai' \                         # parameters
+                  jovian:///rohit/city \             # input gist
+                  jovian:///rohit/city \             # output gist
+                  --no-request-save-on-cell-execute  # save after execution terminates
  ```
 
