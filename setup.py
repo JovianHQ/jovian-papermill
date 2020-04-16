@@ -42,7 +42,9 @@ setup(
     packages=find_packages(),
     python_requires=">=3.5",
     install_requires=read_reqs("requirements.txt"),
-    entry_points={"papermill.io": [r"jovian://=jovian_papermill:JovianHandler"]},
+    entry_points={
+        "papermill.io": [r"jovian://=jovian_papermill.handler:JovianHandler"]
+    },
     project_urls={
         "Source": "https://github.com/JovianML/jovian-papermill/",
         "Tracker": "https://github.com/JovianML/jovian-papermill/issues",
