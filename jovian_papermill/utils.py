@@ -46,7 +46,7 @@ def add_parameters_tag(notebook):
     """Add tag 'parameters' to notebook cell containing the '# parametrize'"""
     nb = nbformat.reads(notebook, as_version=4)
 
-    pattern = re.compile("# *parametrize", re.IGNORECASE)
+    pattern = re.compile("^# *parametrize", re.IGNORECASE)
 
     # Find the first cell containing '# parametrize'
     param_cell = None

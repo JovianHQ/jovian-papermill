@@ -1,8 +1,10 @@
 import warnings
 
 warnings.filterwarnings("ignore")
-
-import papermill as pm
+try:
+    import papermill as pm
+except:
+    pass
 from .utils import log
 
 
