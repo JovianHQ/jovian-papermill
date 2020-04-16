@@ -31,7 +31,7 @@ with open(os.path.join(here, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
-    name="jovian-papermill", 
+    name="jovian_papermill", 
     version="0.0.0",
     author="Jovian",
     author_email="hello@jovian.ml",

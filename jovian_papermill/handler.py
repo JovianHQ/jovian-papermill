@@ -22,8 +22,8 @@ class JovianHandler:
         """
         Commit a notebook to Jovian
         """
-        slug, version = get_slug_and_version(path)
-        metadata = api.get_gist(slug, version)
+        slug, _ = get_slug_and_version(path)
+        metadata = api.get_gist(slug)
         filename = get_nbfile(metadata["files"])["filename"]
         api.upload_file(gist_slug=slug, file=(filename, file_content))
 
