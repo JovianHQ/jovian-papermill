@@ -2,7 +2,7 @@ from urllib.parse import parse_qs, urlparse
 
 
 def log(msg):
-    print(f"[jovian-papermill]: {msg}")
+    print(f"[jovian-papermill] {msg}")
 
 
 def get_nbfile(files):
