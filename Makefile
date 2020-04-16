@@ -4,3 +4,6 @@ test:
 test-coverage: test
 	coverage html -i
 	open "htmlcov/index.html"
+
+black:
+	black jovian_papermill
