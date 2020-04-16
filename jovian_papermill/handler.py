@@ -6,7 +6,7 @@ from jovian_papermill.utils import get_nbfile, get_slug_and_version
 
 class JovianHandler:
     @classmethod
-    def read(self, path):
+    def read(cls, path):
         """
         Read a notebook from Jovian
         """
@@ -18,7 +18,7 @@ class JovianHandler:
         return notebook
 
     @classmethod
-    def write(self, file_content, path):
+    def write(cls, file_content, path):
         """
         Commit a notebook to Jovian
         """
@@ -28,9 +28,9 @@ class JovianHandler:
         api.upload_file(gist_slug=slug, file=(filename, file_content))
 
     @classmethod
-    def pretty_path(self, path):
+    def pretty_path(cls, path):
         return path
 
     @classmethod
-    def listdir(self, path):
+    def listdir(cls, path):
         raise NotImplementedError

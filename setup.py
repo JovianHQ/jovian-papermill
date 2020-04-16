@@ -12,12 +12,12 @@ from setuptools import find_packages, setup
 local_path = os.path.dirname(__file__)
 # Fix for tox which manipulates execution pathing
 if not local_path:
-    local_path = '.'
+    local_path = "."
 here = os.path.abspath(local_path)
 
 
 def read(fname):
-    with open(fname, 'r') as fhandle:
+    with open(fname, "r") as fhandle:
         return fhandle.read()
 
 
@@ -27,30 +27,30 @@ def read_reqs(fname):
 
 
 # Get the long description from the README file
-with open(os.path.join(here, 'README.md'), encoding='utf-8') as f:
+with open(os.path.join(here, "README.md"), encoding="utf-8") as f:
     long_description = f.read()
 
 setup(
-    name="jovian_papermill", 
+    name="jovian_papermill",
     version="0.0.0",
     author="Jovian",
     author_email="hello@jovian.ml",
     description="A Jovian I/O handler for papermill",
     long_description=long_description,
-    long_description_content_type='text/markdown',
-    url='https://github.com/JovianML/jovian-papermill',
+    long_description_content_type="text/markdown",
+    url="https://github.com/JovianML/jovian-papermill",
     packages=find_packages(),
-    python_requires='>=3.5',
-    install_requires=read_reqs('requirements.txt'),
+    python_requires=">=3.5",
+    install_requires=read_reqs("requirements.txt"),
     entry_points={"papermill.io": [r"jvn://=jovian_papermill:JovianHandler"]},
     project_urls={
-        'Source': 'https://github.com/JovianML/jovian-papermill/',
-        'Tracker': 'https://github.com/JovianML/jovian-papermill/issues',
+        "Source": "https://github.com/JovianML/jovian-papermill/",
+        "Tracker": "https://github.com/JovianML/jovian-papermill/issues",
     },
     classifiers=[
-        'Intended Audience :: Developers',
-        'License :: OSI Approved :: BSD License',
-        'Programming Language :: Python',
-        'Programming Language :: Python :: 3',
+        "Intended Audience :: Developers",
+        "License :: OSI Approved :: BSD License",
+        "Programming Language :: Python",
+        "Programming Language :: Python :: 3",
     ],
 )
