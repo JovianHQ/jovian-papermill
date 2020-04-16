@@ -1,7 +1,7 @@
 from requests import get
 
 from jovian.utils import api, clone
-from jovian_papermill.utils import get_nbfile, get_slug_and_version
+from .utils import get_nbfile, get_slug_and_version, log
 
 
 class JovianHandler:
@@ -14,7 +14,7 @@ class JovianHandler:
         gist = clone.get_gist(slug, version, fresh=False)
         nbfile = get_nbfile(gist["files"])
         notebook = get(nbfile["rawUrl"]).content
-
+        log(f"Cloned {slug}")
         return notebook
 
     @classmethod
@@ -25,7 +25,10 @@ class JovianHandler:
         slug, _ = get_slug_and_version(path)
         metadata = api.get_gist(slug)
         filename = get_nbfile(metadata["files"])["filename"]
-        api.upload_file(gist_slug=slug, file=(filename, file_content))
+        gist_slug = metadata["slug"]
+
+        api.upload_file(gist_slug=gist_slug, file=(filename, file_content))
+        log(f"Committed to {slug}")
 
     @classmethod
     def pretty_path(cls, path):

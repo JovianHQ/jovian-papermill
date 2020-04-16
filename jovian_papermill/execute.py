@@ -1,4 +1,8 @@
+import warnings
+
+warnings.filterwarnings("ignore")
 import papermill as pm
+from .utils import log
 
 
 def execute(gist_slug, parameters, version="0"):
@@ -9,5 +13,5 @@ def execute(gist_slug, parameters, version="0"):
         parameters=parameters,
         request_save_on_cell_execute=False,
         progress_bar=False,
+        log_level="INFO",
     )
-    print("Success!")
