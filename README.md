@@ -20,14 +20,6 @@ Papermill recognizes the protocol to be `jvn://` and delegates the I/O Handler t
 **Note**: Input and output JGL must point to same gist for normal usage. 
 
 ## Usage
-
-### via CLI
-```bash
-papermill -p city 'Mumbai' \                                # parameters
-                  jvn:///cebe687752e844649cdf1e4cfba34c6d \ # input gist
-                  jvn:///cebe687752e844649cdf1e4cfba34c6d \ # output gist
-                  --no-request-save-on-cell-execute         # save after execution terminates
- ```
  
 ### via `jovian-papermill` Python API
 ```python
@@ -36,3 +28,12 @@ from jovian_papermill import execute
 
 execute("cebe687752e844649cdf1e4cfba34c6d", dict(city="Mumbai"))
 ```
+
+### via CLI
+```bash
+papermill -p city 'Mumbai' \                                # parameters
+                  jvn:///cebe687752e844649cdf1e4cfba34c6d \ # input gist
+                  jvn:///cebe687752e844649cdf1e4cfba34c6d \ # output gist
+                  --no-request-save-on-cell-execute         # save after execution terminates
+ ```
+
