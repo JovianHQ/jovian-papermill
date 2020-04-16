@@ -22,7 +22,7 @@ Papermill recognizes the protocol to be `jovian://` and delegates the I/O Handle
 ### via `jovian-papermill` Python API
 ```python
 from jovian_papermill.execute import execute
-execute("rohit/ciy", parameters=dict(city="Mumbai"))
+execute("rohit/city", parameters=dict(city="Mumbai"))
 ```
 
 ### via CLI
