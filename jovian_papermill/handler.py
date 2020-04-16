@@ -1,7 +1,7 @@
 from requests import get
 
 from jovian.utils import api, clone
-from .utils import get_nbfile, get_gist_and_nbfile, add_metadata, log
+from .utils import get_nbfile, get_gist_and_nbfile, add_parameters_tag, log
 
 
 class JovianHandler:
@@ -17,7 +17,7 @@ class JovianHandler:
 
         log(f"Cloning...")
         notebook = get(nbfile["rawUrl"]).content
-        return add_metadata(notebook)
+        return add_parameters_tag(notebook)
 
     @classmethod
     def write(cls, file_content, path):

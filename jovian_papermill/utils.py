@@ -42,7 +42,7 @@ def get_gist_and_nbfile(path):
     return gist, nbfile
 
 
-def add_metadata(notebook):
+def add_parameters_tag(notebook):
     """Add tag 'parameters' to notebook cell containing the '# parametrize'"""
     nb = nbformat.reads(notebook, as_version=4)
 
