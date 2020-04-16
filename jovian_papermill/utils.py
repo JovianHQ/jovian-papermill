@@ -18,15 +18,7 @@ def get_nbfile(files):
     return None
 
 
-def get_gist_and_nbfile(path):
-    """Get gist and nbfile from custom Jovian path
-    
-    Arguments
-        path
-            - should be in the form of jovian:///gist_slug?gist_version=2
-    Returns
-        gist, nbfile
-    """
+def get_slug_and_version(path):
     parsed_url = urlparse(path)
 
     slug = parsed_url.path[1:]
@@ -36,6 +28,19 @@ def get_gist_and_nbfile(path):
     if "gist_version" in query:
         version = query["gist_version"][0]
 
+    return slug, version
+
+
+def get_gist_and_nbfile(path):
+    """Get gist and nbfile from custom Jovian path
+    
+    Arguments
+        path
+            - should be in the form of jovian:///gist_slug?gist_version=2
+    Returns
+        gist, nbfile
+    """
+    slug, version = get_slug_and_version(path)
     gist = clone.get_gist(slug, version, fresh=False)
     nbfile = get_nbfile(gist["files"])
 
@@ -45,6 +50,10 @@ def get_gist_and_nbfile(path):
 def add_parameters_tag(notebook):
     """Add tag 'parameters' to notebook cell containing the '# parametrize'"""
     nb = nbformat.reads(notebook, as_version=4)
+    # Check if the tag 'parameters' already exists in any of the cells
+    for cell in nb.cells:
+        if "tags" in cell.metadata and "parameters" in cell.metadata["tags"]:
+            return json.dumps(nb)
 
     pattern = re.compile("^# *parametrize", re.IGNORECASE)
 
