@@ -7,9 +7,9 @@ from .utils import encode, log
 warnings.filterwarnings("ignore")
 
 
-def execute(gist_slug, parameters, creds, version="0"):
+def execute(gist, parameters, creds, version="0"):
     creds = encode(creds)
-    path = f"jovian:///{gist_slug}?gist_version={version}&creds={creds}"
+    path = f"jovian:///{gist}?gist_version={version}&creds={creds}"
 
     pm.execute_notebook(
         input_path=path,

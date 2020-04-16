@@ -18,18 +18,15 @@ Below is the format of a Jovian URL, or we could call it - Jovian Gist Locator (
 Papermill recognizes the protocol to be `jovian://` and delegates the I/O Handler to `jovian-papermill`.
 
 ## Usage
- 
-### via `jovian-papermill` Python API
+
 ```python
 from jovian_papermill.execute import execute
-execute("rohit/city", parameters=dict(city="Mumbai"))
+
+creds = {
+    "API_KEY": "",
+    "API_URL": "",
+}
+execute(gist="rohit/city", creds=creds, parameters=dict(city="Mumbai"))
 ```
 
-### via CLI
-```bash
-papermill -p city 'Mumbai' \                         # parameters
-                  jovian:///rohit/city \             # input gist
-                  jovian:///rohit/city \             # output gist
-                  --no-request-save-on-cell-execute  # save after execution terminates
- ```
 
