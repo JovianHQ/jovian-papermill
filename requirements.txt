@@ -1,3 +1,4 @@
 requests==2.23.0
 papermill==2.1.0
 ipykernel==5.2.1
+click

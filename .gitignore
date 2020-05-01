@@ -131,3 +131,5 @@ dmypy.json
 # Editor configs
 .vscode/
 
+# requests_cache db instance
+demo_cache.sqlite
