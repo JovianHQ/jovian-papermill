@@ -48,6 +48,8 @@ def execute_cli(ctx, gist, parameters_file, version):
 
         execute(gist=gist, parameters=parameters, creds=creds, version=version)
 
+    log("Success!")
+
 
 if __name__ == '__main__':
     main()

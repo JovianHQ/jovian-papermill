@@ -1,9 +1,12 @@
 import os
 
-from requests import get
+import requests_cache
+import requests
 
 from .jovian_utils import _h, upload_file
 from .utils import add_parameters_tag, get_gist_and_nbfile, get_nbfile, log
+
+requests_cache.install_cache('jovian_papermill_cache')
 
 
 class JovianHandler:
@@ -19,8 +22,7 @@ class JovianHandler:
         cls.gist = gist
         cls.creds = creds
 
-        log(f"Cloning...")
-        notebook = get(nbfile["rawUrl"]).content
+        notebook = requests.get(nbfile["rawUrl"]).content
         return add_parameters_tag(notebook)
 
     @classmethod
@@ -31,9 +33,9 @@ class JovianHandler:
         gist_slug = cls.gist["slug"]
         filename = get_nbfile(cls.gist["files"])["filename"]
 
-        log(f"Committing...")
         upload_file(
-            gist_slug=gist_slug, file=(filename, file_content), creds=cls.creds,
+            gist_slug=gist_slug, file=(
+                filename, file_content), creds=cls.creds,
         )
 
     @classmethod
