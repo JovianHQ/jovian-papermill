@@ -43,7 +43,8 @@ setup(
     python_requires=">=3.5",
     install_requires=read_reqs("requirements.txt"),
     entry_points={
-        "papermill.io": [r"jovian://=jovian_papermill.handler:JovianHandler"]
+        "papermill.io": [r"jovian://=jovian_papermill.handler:JovianHandler"],
+        "console_scripts": ["jovian-papermill=jovian_papermill.cli:main"],
     },
     project_urls={
         "Source": "https://github.com/JovianML/jovian-papermill/",

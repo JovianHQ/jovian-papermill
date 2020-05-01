@@ -1,3 +1,4 @@
+import os
 import warnings
 
 import papermill as pm
@@ -19,4 +20,3 @@ def execute(gist, parameters, creds, version="0"):
         progress_bar=False,
         log_level="INFO",
     )
-    log("Done!")

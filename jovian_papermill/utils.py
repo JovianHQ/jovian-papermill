@@ -4,12 +4,20 @@ import re
 from urllib.parse import parse_qs, urlparse
 
 import nbformat
+import click
 
 from .jovian_utils import get_gist
 
 
-def log(msg):
-    print(f"[jovian-papermill] {msg}")
+def log(msg, pre=True, error=False, color=None):
+    """Print a message to stdout"""
+    msg = str(msg)
+    if error:
+        click.secho(('[jovian-papermill] ' if pre else '') +
+                    'Error: ' + msg, err=True, fg='red')
+    else:
+        click.echo(('[jovian-papermill] ' if pre else '') +
+                   click.style(msg, fg=color))
 
 
 def get_nbfile(files):
@@ -34,7 +42,7 @@ def get_slug_and_version(path):
 
 def get_gist_and_nbfile(path):
     """Get gist and nbfile from custom Jovian path
-    
+
     Arguments
         path
             - should be in the form of jovian:///gist_slug?gist_version=2
