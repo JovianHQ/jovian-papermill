@@ -8,7 +8,7 @@ from .utils import encode, log
 warnings.filterwarnings("ignore")
 
 
-def execute(gist, parameters, creds, version="0"):
+def execute(gist, parameters, creds, version="0", **kwargs):
     creds = encode(creds)
     path = f"jovian:///{gist}?gist_version={version}&creds={creds}"
 
@@ -19,4 +19,5 @@ def execute(gist, parameters, creds, version="0"):
         request_save_on_cell_execute=False,
         progress_bar=False,
         log_level="INFO",
+        **kwargs
     )
