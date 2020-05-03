@@ -30,13 +30,29 @@ class JovianHandler:
         """
         Commit a notebook to Jovian
         """
-        gist_slug = cls.gist["slug"]
-        filename = get_nbfile(cls.gist["files"])["filename"]
+        if cls.gist is None or cls.creds is None:
+            gist, nbfile, creds = get_gist_and_nbfile(path)
+            cls.gist = gist
+            cls.creds = creds
 
-        upload_file(
+        gist_slug = cls.gist["slug"]
+        nbfilename = get_nbfile(cls.gist["files"])["filename"]
+
+        res = upload_file(
             gist_slug=gist_slug, file=(
-                filename, file_content), creds=cls.creds,
+                nbfilename, file_content), creds=cls.creds,
         )
+        slug, version = res["slug"], res["version"]
+        # Upload remaining files
+        for file in cls.gist["files"]:
+            if file["filename"] != nbfilename:
+                upload_file(
+                    gist_slug=gist_slug,
+                    file=(file["filename"], requests.get(
+                        file["rawUrl"]).content),
+                    creds=cls.creds,
+                    version=version
+                )
 
     @classmethod
     def pretty_path(cls, path):

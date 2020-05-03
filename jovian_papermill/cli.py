@@ -22,7 +22,7 @@ def main(ctx, log_level="info"):
               default=None,
               required=True)
 @click.option('-v', '--version', 'version', help="Gist version", type=str, default='0')
-@click.option('-k', '--kernel-name', 'kernel_name', help="Kernel name", type=str)
+@click.option('-k', '--kernel-name', 'kernel_name', help="Kernel name", type=str, default=None)
 @click.pass_context
 def execute_cli(ctx, gist, parameters_file, version, kernel_name):
     try:
@@ -46,7 +46,6 @@ def execute_cli(ctx, gist, parameters_file, version, kernel_name):
     log("Executing..")
     for idx, parameters in enumerate(parameters_list):
         log("Executing parameters: {}".format(idx + 1))
-
         execute(gist=gist, parameters=parameters, creds=creds,
                 version=version, kernel_name=kernel_name)
 
